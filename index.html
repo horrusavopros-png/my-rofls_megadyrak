@@ -16,7 +16,6 @@
             min-height: 95vh;
         }
 
-        /* Кнопка музыки в углу */
         .music-control {
             position: fixed;
             top: 20px;
@@ -60,7 +59,6 @@
 </head>
 <body>
 
-    <!-- КНОПКА МУЗЫКИ -->
     <button class="music-control" onclick="toggleMusic()" id="musicBtn">🎵 ВКЛЮЧИТЬ МУЗЫКУ</button>
 
     <h1> Самые умные дураки здесь! </h1>
@@ -75,12 +73,12 @@
     <div class="footer">Сделано Артемием всевластным дураком чуваком.</div>
     
     <audio id="bg-music" loop>
+        <!-- ТУТ ТЕПЕРЬ ПРЯМАЯ РАБОЧАЯ ССЫЛКА НА MP3 -->
         <source src="https://files.catbox.moe" type="audio/mpeg">
     </audio>
 
     <script>
         const audio = document.getElementById("bg-music");
-       const audio = document.getElementById("bg-music");
         const btn = document.getElementById("musicBtn");
 
         function toggleMusic() {
@@ -88,12 +86,17 @@
                 audio.play().then(() => {
                     btn.innerText = "⏸ ПАУЗА";
                     btn.style.background = "#ff00ff";
-                }).catch(e => alert("Браузер блокирует звук! Нажми ещё раз."));
+                }).catch(e => {
+                    console.log(e);
+                    alert("Браузер блокирует звук! Нажми ещё раз.");
+                });
             } else {
                 audio.pause();
                 btn.innerText = "🎵 ВКЛЮЧИТЬ МУЗЫКУ";
                 btn.style.background = "rgba(255, 0, 255, 0.2)";
             }
         }
+    </script> <!-- ЗДЕСЬ Я ДОБАВИЛ ЗАКРЫВАЮЩИЙ ТЕГ -->
+
 </body>
 </html>
