@@ -4,119 +4,43 @@
     <meta charset="UTF-8">
     <title>ПРАВДА ОБ АНТОНЕ</title>
     <style>
-        /* Стильный темный фон с красным градиентом */
         body { 
             background: radial-gradient(circle, #2b0000 0%, #000000 100%); 
-            color: #fff; 
-            text-align: center; 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            padding: 50px; 
-            margin: 0;
-            border: 5px solid #ff0000;
-            box-shadow: inset 0 0 100px #000;
-            min-height: 100vh;
-            overflow-x: hidden;
+            color: #fff; text-align: center; font-family: sans-serif; 
+            padding: 50px; margin: 0; border: 5px solid #ff0000; min-height: 100vh;
         }
-
-        h1 { 
-            color: #ff0000; 
-            font-size: 3.5em; 
-            text-transform: uppercase;
-            text-shadow: 0 0 15px #ff0000, 2px 2px #550000;
-            letter-spacing: 5px;
-            margin-bottom: 30px;
-        }
-
-        /* Главное фото с красным свечением */
-        .main-img { 
-            max-width: 450px; 
-            border: 3px solid #ff0000; 
-            border-radius: 20px;
-            box-shadow: 0 0 30px #ff0000;
-            transition: transform 0.3s;
-        }
-        .main-img:hover { transform: scale(1.05); }
-
-        /* Кнопка призыва */
+        h1 { color: #ff0000; font-size: 3em; text-shadow: 0 0 15px #ff0000; }
+        .main-img { max-width: 450px; border: 3px solid #ff0000; border-radius: 20px; box-shadow: 0 0 30px #ff0000; }
         .summon-btn { 
-            background: linear-gradient(145deg, #ff0000, #8b0000);
-            color: white; 
-            padding: 20px 40px; 
-            font-weight: bold; 
-            border: none; 
-            border-radius: 50px;
-            cursor: pointer; 
-            font-size: 1.8em; 
-            margin: 30px;
-            box-shadow: 0 0 20px #ff0000;
-            transition: 0.2s;
-            text-transform: uppercase;
+            background: #ff0000; color: white; padding: 20px 40px; 
+            font-weight: bold; border: none; border-radius: 50px;
+            cursor: pointer; font-size: 1.5em; margin: 30px; box-shadow: 0 0 20px #ff0000;
         }
-        .summon-btn:hover { 
-            transform: translateY(-5px);
-            box-shadow: 0 0 40px #ff0000;
-            background: #ff3333;
-        }
-        .summon-btn:active { transform: translateY(2px); }
-
-        /* Трактор, который вылетает сбоку */
         #tractor { 
-            display: none; 
-            width: 400px; 
-            position: fixed; 
-            bottom: 20px; 
-            right: -500px; /* Прячем за экраном */
-            z-index: 1000;
-            filter: drop-shadow(0 0 20px #ff0000);
-            transition: right 1s ease-out; /* Плавный выезд */
+            display: none; width: 350px; position: fixed; 
+            bottom: 20px; right: -500px; z-index: 1000;
+            transition: right 1s ease-out; 
         }
-
-        .back { 
-            margin-top: 60px; 
-            display: inline-block; 
-            color: #666; 
-            text-decoration: none; 
-            font-size: 1.1em;
-            transition: 0.3s;
-        }
-        .back:hover { color: #ff0000; }
+        .back { margin-top: 50px; display: inline-block; color: #666; text-decoration: none; }
     </style>
 </head>
 <body>
-
     <h1>АНТОН ЧУГУН НИКОГО НЕ УБИВАЛ!!!!!!!</h1>
-    
-    <!-- Главное фото Антона (убедись, что название файла верное) -->
+    <!-- ПРОВЕРЬ: если файл на GitHub называется ANTONCHIGYN.jpg, добавь .jpg в src -->
     <img src="ANTONCHIGYN" alt="Антон" class="main-img">
-
     <br>
     <button class="summon-btn" onclick="summonTractor()">ПРИЗВАТЬ ТРАКТОР</button>
-
-    <!-- Трактор (убедись, что название файла верное) -->
     <img id="tractor" src="maxresdefault.jpg" alt="Трактор">
-
-    <!-- ИСПРАВЛЕННАЯ ССЫЛКА НА МУЗЫКУ -->
     <audio id="music" src="https://www.myinstants.com"></audio>
-
     <a href="index.html" class="back">← Вернуться к Артемию Всевластному</a>
-
     <script>
         function summonTractor() {
             const tractor = document.getElementById('tractor');
             const music = document.getElementById('music');
-
-            // Показываем и заставляем трактор выехать
             tractor.style.display = 'block';
-            setTimeout(() => {
-                tractor.style.right = '10%'; // Позиция остановки
-            }, 100);
-
-            // Играем музыку
+            setTimeout(() => { tractor.style.right = '10%'; }, 100);
             music.play();
-
-            alert("ОСТОРОЖНО! ТРАКТОР В ПУТИ!");
         }
     </script>
-
 </body>
 </html>
