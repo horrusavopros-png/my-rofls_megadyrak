@@ -78,14 +78,17 @@
 
         <!-- Появляющаяся зона с Антоном -->
         <div id="chigur-zone">
+            <!-- Убедись, что название картинки в src совпадает с тем, что на GitHub -->
             <img src="ANTONCHIGYN" alt="Антон" class="chigur-img">
             <div class="answer">А твоё какое дело.... дружок.</div>
         </div>
     </div>
 
-    <!-- Трактор и музыка остаются (скрыты) -->
+    <!-- Трактор (скрыт) -->
     <img id="tractor" src="maxresdefault.jpg" style="display:none; width: 200px; position: fixed; bottom: 10px; right: 10px;">
-    <audio id="music" src="https://www.myinstants.com"></audio>
+    
+    <!-- ТУТ Я ВСТАВИЛ ТВОЙ ГОЛОС -->
+    <audio id="music" src="a-tvoio-kakoe-delo-druzhok_WYWwaQ7.mp3"></audio>
 
     <a href="index.html" class="back">← уйти, пока цел</a>
 
@@ -98,9 +101,9 @@
             const zone = document.getElementById('chigur-zone');
             zone.style.display = 'block';
 
-            // Можно добавить музыку или звук для атмосферы
+            // Запускаем звук голоса
             const music = document.getElementById('music');
-            music.play();
+            music.play().catch(e => console.log("Нужен клик по странице"));
         }
     </script>
 
