@@ -15,7 +15,27 @@
             border-image: linear-gradient(45deg, #8a2be2, #ff00ff, #4b0082, #9400d3) 1;
             min-height: 95vh;
         }
-        h1 { font-size: 3.5em; color: #fff; text-shadow: 0 0 20px #8a2be2, 0 0 40px #ff00ff; }
+
+        /* Кнопка музыки в углу */
+        .music-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 0, 255, 0.2);
+            border: 2px solid #ff00ff;
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            transition: 0.3s;
+        }
+        .music-control:hover { background: #ff00ff; box-shadow: 0 0 20px #ff00ff; }
+
+        h1 { font-size: 3.5em; color: #fff; text-shadow: 0 0 20px #8a2be2; }
+        
         .meme-box {
             background: rgba(45, 0, 89, 0.6);
             border: 2px solid #ff00ff;
@@ -27,6 +47,7 @@
             box-shadow: 0 0 30px rgba(138, 43, 226, 0.5);
         }
         img { max-width: 100%; border-radius: 20px; }
+
         .yellow-btn {
             background: linear-gradient(145deg, #ffff00, #ffcc00);
             color: #000; padding: 20px 40px; font-weight: 900; 
@@ -37,21 +58,43 @@
         .footer { margin-top: 60px; font-size: 1.4em; color: #ff00ff; }
     </style>
 </head>
-<body onclick="playMusic()">
+<body>
+
+    <!-- КНОПКА МУЗЫКИ -->
+    <button class="music-control" onclick="toggleMusic()" id="musicBtn">🎵 ВКЛЮЧИТЬ МУЗЫКУ</button>
+
     <h1> Самые умные дураки здесь! </h1>
+
     <a href="anton.html" class="yellow-btn">ЗАЙДИ СЮДА БЫСТРО</a>
+
     <div class="meme-box">
         <p style="font-size: 1.5em; font-weight: bold;">Артемий Всевластный:</p>
-        <!-- ПРОВЕРЬ: файл должен называться именно так, включая (2) и .jpg -->
         <img src="photo_2024-09-13_10-19-47 (2).jpg" alt="Артемий">
     </div>
+
     <div class="footer">Сделано Артемием всевластным дураком чуваком.</div>
-    <audio id="bg-music" loop src="https://www.myinstants.com"></audio>
+    
+    <!-- ПРЯМАЯ ССЫЛКА НА ФАЙЛ МУЗЫКИ -->
+    <audio id="bg-music" loop>
+        <source src="https://www.myinstants.com" type="audio/mpeg">
+    </audio>
+
     <script>
-        function playMusic() {
-            var audio = document.getElementById("bg-music");
-            if (audio.paused) { audio.play(); }
+        const audio = document.getElementById("bg-music");
+        const btn = document.getElementById("musicBtn");
+
+        function toggleMusic() {
+            if (audio.paused) {
+                audio.play();
+                btn.innerText = "⏸ ПАУЗА";
+                btn.style.background = "#ff00ff";
+            } else {
+                audio.pause();
+                btn.innerText = "🎵 ВКЛЮЧИТЬ МУЗЫКУ";
+                btn.style.background = "rgba(255, 0, 255, 0.2)";
+            }
         }
     </script>
+
 </body>
 </html>
