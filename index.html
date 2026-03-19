@@ -2,56 +2,86 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Логово Артемия Всевластного</title>
     <style>
+        /* Общие настройки — чтобы ничего не дергалось */
+        * { box-sizing: border-box; }
+        
         body { 
             background: radial-gradient(circle at center, #1a0033 0%, #05000a 100%); 
             color: #e0b0ff; 
             font-family: 'Segoe UI', sans-serif;
-            text-align: center;
             margin: 0;
-            padding: 40px 20px;
-            min-height: 120vh;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             border: 10px solid #8a2be2;
-            box-sizing: border-box;
+            overflow-x: hidden; /* Запрет боковой прокрутки */
         }
 
-        /* Кнопка "X" ПРИЗВАТЬ АНТОНА */
+        /* Кнопка "X" слева сверху */
         .anton-caller {
             position: fixed; top: 20px; left: 20px;
             z-index: 1000; text-align: center;
         }
         .cross-btn {
-            width: 60px; height: 60px;
+            width: 50px; height: 50px;
             background: #ff0000;
             clip-path: polygon(20% 0%, 0% 20%, 30% 50%, 0% 80%, 20% 100%, 50% 70%, 80% 100%, 100% 80%, 70% 50%, 100% 20%, 80% 0%, 50% 30%);
             cursor: pointer;
             box-shadow: 0 0 15px #ff0000;
-            transition: 0.3s;
         }
-        .cross-btn:hover { transform: rotate(90deg) scale(1.1); background: #fff; }
         .btn-label { font-size: 10px; color: #ff0000; font-weight: bold; margin-top: 5px; display: block; }
 
+        /* Трактор справа сверху */
         #tractor {
-            display: none; position: fixed; top: 30px; right: 30px; width: 130px;
+            display: none; position: fixed; top: 20px; right: 20px; width: 120px;
             filter: drop-shadow(0 0 15px #ff00ff); z-index: 100;
             animation: bounce 2s infinite ease-in-out;
         }
-        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
+        /* Центральный контент */
+        .container {
+            max-width: 600px;
+            width: 90%;
+            padding: 60px 0;
+            z-index: 10;
+        }
+
+        h1 { font-size: 2.5em; text-shadow: 0 0 20px #8a2be2; margin-bottom: 20px; }
+
+        .go-btn { 
+            background: #ffcc00; color: #000; padding: 15px 30px; 
+            font-weight: 900; border-radius: 50px; text-decoration: none; 
+            display: inline-block; margin-bottom: 30px; font-size: 1.1em;
+            box-shadow: 0 5px 15px rgba(255, 204, 0, 0.3);
+        }
+
+        .card { 
+            background: rgba(255, 255, 255, 0.05); 
+            border: 1px solid #8a2be2;
+            border-radius: 25px; 
+            padding: 20px; 
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+        }
+        .main-img { width: 100%; border-radius: 15px; display: block; }
+
+        /* Рекламная плашка */
         #ad-box {
-            position: fixed; bottom: 30px; left: 30px; width: 320px;
-            background: #fff; color: #000; border-left: 12px solid red;
-            border-radius: 12px; padding: 20px; z-index: 500;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.8); display: none; text-align: left;
+            position: fixed; bottom: 20px; left: 20px; width: 280px;
+            background: #fff; color: #000; border-left: 10px solid red;
+            border-radius: 12px; padding: 15px; z-index: 500;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); display: none;
+            text-align: left;
         }
-        .ad-content img { width: 80px; height: 80px; float: left; margin-right: 15px; border-radius: 50%; border: 2px solid red; }
-        .ad-btn { 
-            background: #ff0000; color: white; border: none; padding: 12px; 
-            cursor: pointer; font-weight: bold; border-radius: 6px; width: 100%; margin-top: 15px;
-        }
+        .ad-content img { width: 60px; height: 60px; float: left; margin-right: 12px; border-radius: 50%; }
+        .ad-btn { background: red; color: white; border: none; padding: 10px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 10px; border-radius: 5px; }
 
-        /* СКРИМЕР НА ВЕСЬ ЭКРАН */
+        /* СКРИМЕР */
         #screamer {
             display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background: black; z-index: 9999; justify-content: center; align-items: center;
@@ -62,18 +92,16 @@
         }
         @keyframes shake {
             0% { transform: scale(1.1) translate(5px, 5px); }
-            50% { transform: scale(1.3) translate(-10px, -10px); }
+            50% { transform: scale(1.15) translate(-5px, -5px); }
             100% { transform: scale(1.1) translate(5px, -5px); }
         }
 
-        h1 { font-size: 3em; text-shadow: 0 0 25px #8a2be2; margin-top: 60px; }
-        .card { background: rgba(255, 255, 255, 0.03); border-radius: 25px; padding: 30px; max-width: 500px; margin: 40px auto; border: 1px solid rgba(138, 43, 226, 0.3); }
-        .main-img { width: 100%; border-radius: 20px; }
-        .go-btn { background: #ffcc00; color: #000; padding: 15px 40px; font-weight: 900; border-radius: 50px; text-decoration: none; display: inline-block; margin: 20px; }
+        .footer { margin-top: 40px; font-weight: bold; color: #8a2be2; }
     </style>
 </head>
-<body onclick="startEngine()">
+<body onclick="unlockAudio()">
 
+    <!-- Кнопка призвать Антона -->
     <div class="anton-caller">
         <div class="cross-btn" onclick="showTractor()"></div>
         <span class="btn-label">ПРИЗВАТЬ АНТОНА</span>
@@ -81,44 +109,49 @@
 
     <img id="tractor" src="maxresdefault.jpg">
 
+    <div class="container">
+        <h1>Самые умные дураки здесь!</h1>
+        
+        <a href="anton.html" class="go-btn">РАЗГОВОР С АНТОНОМ</a>
+
+        <div class="card">
+            <p style="margin-bottom: 15px; font-weight: bold;">Артемий Всевластный:</p>
+            <img src="photo_2024-09-13_10-19-47 (2).jpg" class="main-img">
+        </div>
+
+        <p class="footer">Created by Artemy The Great</p>
+    </div>
+
+    <!-- Реклама -->
     <div id="ad-box">
         <div class="ad-content">
             <img src="photo_2024-09-13_10-19-47 (2).jpg">
-            <p><b>АРТЕМИЙ СЕКСУАЛЬНЫЙ</b></p>
-            <p style="font-size: 0.8em; color: #666;">В 30 метрах от вас! Жми скорее!</p>
+            <p style="margin: 0; font-size: 0.9em; font-family: Arial;"><b>АРТЕМИЙ СЕКСУАЛЬНЫЙ</b> в 30 метрах от вас!</p>
             <button class="ad-btn" onclick="triggerScreamer()">ОТВЕТИТЬ</button>
         </div>
     </div>
 
+    <!-- Скример -->
     <div id="screamer">
         <img src="photo_2024-09-13_10-19-47 (2).jpg">
     </div>
 
-    <h1>Самые умные дураки здесь!</h1>
-    <a href="anton.html" class="go-btn">РАЗГОВОР С АНТОНОМ</a>
-
-    <div class="card">
-        <img src="photo_2024-09-13_10-19-47 (2).jpg" class="main-photo">
-    </div>
-
-    <!-- Обновленное короткое название файла -->
-    <audio id="scream-audio" preload="auto">
+    <audio id="scream-sound" preload="auto">
         <source src="scream.mp3" type="audio/mpeg">
     </audio>
 
     <script>
-        let isReady = false;
-        const scream = document.getElementById('scream-audio');
+        let audioUnlocked = false;
+        const scream = document.getElementById('scream-sound');
 
-        // Функция "прогрева" звука
-        function startEngine() {
-            if (!isReady) {
+        // Разблокировка звука при первом клике
+        function unlockAudio() {
+            if (!audioUnlocked) {
                 scream.play().then(() => {
                     scream.pause();
                     scream.currentTime = 0;
-                    isReady = true;
-                    console.log("Звук заряжен!");
-                }).catch(e => console.log("Нужен клик"));
+                    audioUnlocked = true;
+                }).catch(e => console.log("Кликни для звука"));
             }
         }
 
@@ -132,12 +165,10 @@
         }, 4000);
 
         function triggerScreamer() {
-            const sc = document.getElementById('screamer');
-            
             document.getElementById('ad-box').style.display = 'none';
+            const sc = document.getElementById('screamer');
             sc.style.display = 'flex';
-
-            // Громкий старт
+            
             scream.volume = 1.0;
             scream.play();
 
