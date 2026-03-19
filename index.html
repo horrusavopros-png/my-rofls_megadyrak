@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -16,22 +16,21 @@
             min-height: 95vh;
         }
 
-        .music-control {
+        /* Трактор вместо кнопки в углу */
+        .corner-tractor {
             position: fixed;
             top: 20px;
             right: 20px;
-            background: rgba(255, 0, 255, 0.2);
-            border: 2px solid #ff00ff;
-            color: #fff;
-            padding: 10px 15px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: bold;
-            backdrop-filter: blur(5px);
+            width: 120px;
+            filter: drop-shadow(0 0 10px #ff00ff);
             z-index: 1000;
-            transition: 0.3s;
+            animation: bounce 2s infinite ease-in-out;
         }
-        .music-control:hover { background: #ff00ff; box-shadow: 0 0 20px #ff00ff; }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
 
         h1 { font-size: 3.5em; color: #fff; text-shadow: 0 0 20px #8a2be2; }
         
@@ -57,9 +56,11 @@
         .footer { margin-top: 60px; font-size: 1.4em; color: #ff00ff; }
     </style>
 </head>
-<body>
+<!-- Музыка включится при первом клике по сайту -->
+<body onclick="playMusic()">
 
-    <button class="music-control" onclick="toggleMusic()" id="musicBtn">🎵 ВКЛЮЧИТЬ МУЗЫКУ</button>
+    <!-- ТРАКТОР В УГЛУ -->
+    <img src="maxresdefault.jpg" alt="Трактор" class="corner-tractor">
 
     <h1> Самые умные дураки здесь! </h1>
 
@@ -73,28 +74,15 @@
     <div class="footer">Сделано Артемием всевластным дураком чуваком.</div>
     
     <audio id="bg-music" loop>
-     <audio id="bg-music" loop>
-    <source src="TRIXXXVD, DORMIRES — Catch Me If You Can (www.lightaudio.ru).mp3" type="audio/mpeg">
-</audio>
-        
-    <script>
-        const audio = document.getElementById("bg-music");
-        const btn = document.getElementById("musicBtn");
+        <source src="TRIXXXVD, DORMIRES — Catch Me If You Can (www.lightaudio.ru).mp3" type="audio/mpeg">
+    </audio>
 
-        function toggleMusic() {
-            if (audio.paused) {
-                audio.play().then(() => {
-                    btn.innerText = "⏸ ПАУЗА";
-                    btn.style.background = "#ff00ff";
-                }).catch(e => {
-                    console.log(e);
-                    alert("Браузер блокирует звук! Нажми ещё раз.");
-                });
-            } else {
-                audio.pause();
-                btn.innerText = "🎵 ВКЛЮЧИТЬ МУЗЫКУ";
-                btn.style.background = "rgba(255, 0, 255, 0.2)";
-            }
+    <script>
+        function playMusic() {
+            var audio = document.getElementById("bg-music");
+            audio.play().catch(function(error) {
+                console.log("Браузер ждет клика для звука");
+            });
         }
     </script>
 
