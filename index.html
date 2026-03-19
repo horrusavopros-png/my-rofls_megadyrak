@@ -2,8 +2,9 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Мои Рофлы — Счётчик IQ</title>
+    <title>Мои Рофлы</title>
     <style>
+        /* Стиль сайта (фиолетовый неон) */
         body { 
             background-color: #1a0033; 
             color: #e0b0ff; 
@@ -17,19 +18,6 @@
         }
         h1 { color: #bc8f8f; text-shadow: 2px 2px 10px #8a2be2; }
         
-        /* Счётчик IQ */
-        .iq-box {
-            background: #4b0082;
-            border: 3px dashed #ff00ff;
-            padding: 20px;
-            display: inline-block;
-            margin-top: 20px;
-            border-radius: 50%;
-            width: 150px;
-            height: 150px;
-        }
-        #iq-number { font-size: 3em; font-weight: bold; display: block; margin-top: 15px; }
-        
         .meme-box {
             background: #2d0059;
             border: 2px solid #8a2be2;
@@ -40,60 +28,39 @@
             box-shadow: 0 0 20px #4b0082;
         }
         img { max-width: 100%; border-radius: 10px; }
-        button {
-            background: #ff00ff;
-            border: none;
-            padding: 10px 20px;
-            color: white;
-            font-weight: bold;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 1.1em;
+
+        /* Стиль для желтой кнопки */
+        .yellow-btn {
+            background: yellow; 
+            color: black; 
+            padding: 15px 30px; 
+            font-weight: bold; 
+            border: none; 
+            border-radius: 10px; 
+            cursor: pointer; 
+            font-size: 1.2em;
+            text-decoration: none;
+            display: inline-block;
+            margin: 20px;
         }
-        button:hover { background: #cc00cc; }
+        .yellow-btn:hover { background: #ffd700; }
+
         .footer { margin-top: 50px; font-size: 1.2em; color: #ff00ff; font-weight: bold; }
     </style>
 </head>
 <body>
 
-    <h1> Самые умные дураки сдез! </h1>
+    <h1> Самые умные дураки здесь! </h1>
 
-    <div class="iq-box">
-        <span>Твой IQ:</span>
-        <span id="iq-number">???</span>
-    </div>
-    <br><br>
-    <button onclick="analyzeIQ()">УЗНАТЬ МОЙ IQ</button>
+    <!-- Кнопка перехода на вторую страницу -->
+    <a href="anton.html" class="yellow-btn">ЗАЙДИ СЮДА БЫСТРО</a>
 
     <div class="meme-box">
-        <p>Артемий Всевластный следит за твоим интеллектом:</p>
+        <p>Артемий Всевластный:</p>
         <img src="photo_2024-09-13_10-19-47 (2).jpg" alt="Артемий">
     </div>
 
     <div class="footer">Сделано Артемием всевластным дураком чуваком.</div>
-
-    <script>
-        function analyzeIQ() {
-            const iqElement = document.getElementById('iq-number');
-            let count = 0;
-            // Анимация крутилки
-            const interval = setInterval(() => {
-                iqElement.innerText = Math.floor(Math.random() * 300);
-                count++;
-                if (count > 20) {
-                    clearInterval(interval);
-                    // Финальный рофло-результат
-                    const results = [3, 7, 228, 0, 1000, -5, 42];
-                    iqElement.innerText = results[Math.floor(Math.random() * results.length)];
-                    alert("Анализ завершен! Твой уровень: " + iqElement.innerText);
-                }
-            }, 50);
-        }
-    </script>
-    <a href="anton.html">
-   
-        <button style="background: yellow; color: black; margin: 20px;">ЗАЙДИ СЮДА БЫСТРО</button>
-</a>
 
 </body>
 </html>
