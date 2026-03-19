@@ -13,21 +13,17 @@
             padding: 40px 20px;
             border: 10px solid;
             border-image: linear-gradient(45deg, #8a2be2, #ff00ff, #4b0082, #9400d3) 1;
-            min-height: 150vh;
+            min-height: 120vh;
         }
 
-        /* Трактор */
+        /* Трактор в углу - ПРОСТО КАРТИНКА */
         .corner-tractor {
             position: fixed; top: 20px; right: 20px; width: 100px;
             filter: drop-shadow(0 0 10px #ff00ff); z-index: 100;
             animation: bounce 2s infinite ease-in-out;
         }
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
-        /* Плашка рекламы */
         #ad-box {
             position: fixed; bottom: 20px; left: 20px; width: 320px;
             background: #fff; color: #000; border: 4px solid red;
@@ -36,35 +32,22 @@
             text-align: left; font-family: Arial, sans-serif;
         }
         .ad-content img { width: 80px; float: left; margin-right: 15px; border-radius: 10px; }
-        .ad-btn { 
-            background: red; color: white; border: none; padding: 10px 20px; 
-            cursor: pointer; font-weight: bold; border-radius: 5px; width: 100%; margin-top: 10px;
-        }
+        .ad-btn { background: red; color: white; border: none; padding: 10px 20px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 10px; }
 
-        /* СКРИМЕР - ТЕПЕРЬ С ТРЯСКОЙ */
         #screamer {
-            display: none; position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: black; z-index: 9999;
-            justify-content: center; align-items: center;
+            display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: black; z-index: 9999; justify-content: center; align-items: center;
         }
         #screamer img { 
             width: 120%; height: 120%; object-fit: cover;
-            animation: jump-shake 0.1s infinite; /* Тряска */
+            animation: jump-shake 0.1s infinite;
         }
-
-        @keyframes jump-shake {
-            0% { transform: translate(0,0) scale(1); }
-            25% { transform: translate(10px, 10px) scale(1.1); }
-            50% { transform: translate(-10px, 10px) scale(1.2); }
-            75% { transform: translate(10px, -10px) scale(1.1); }
-            100% { transform: translate(0,0) scale(1); }
-        }
+        @keyframes jump-shake { 0% { transform: translate(0,0) scale(1); } 50% { transform: translate(-10px, 10px) scale(1.1); } 100% { transform: translate(0,0) scale(1); } }
 
         .meme-box { background: rgba(45,0,89,0.6); border: 2px solid #ff00ff; border-radius: 30px; padding: 20px; max-width: 600px; margin: 40px auto; }
         img.main-artem { max-width: 100%; border-radius: 20px; }
         .yellow-btn { background: yellow; color: #000; padding: 15px 30px; font-weight: 900; border-radius: 50px; text-decoration: none; display: inline-block; }
-        .footer { margin-top: 100px; font-size: 1.4em; color: #ff00ff; }
+        .footer { margin-top: 60px; font-size: 1.4em; color: #ff00ff; }
     </style>
 </head>
 <body onclick="unlockAudio()">
@@ -75,7 +58,7 @@
         <div class="ad-content">
             <img src="photo_2024-09-13_10-19-47 (2).jpg">
             <p><b>СРОЧНО!</b> Артемий сексуальный в 30 метрах от вас!</p>
-            <button class="ad-btn" onclick="triggerScreamer()">ОТВЕТИТЬ</button>
+            <button class="ad-btn" onclick="startScreamer()">ОТВЕТИТЬ</button>
         </div>
     </div>
 
@@ -93,52 +76,46 @@
 
     <div class="footer">Сделано Артемием всевластным дураком чуваком.</div>
     
-    <!-- ЗВУКИ -->
+    <!-- ТУТ ВСЁ ИСПРАВИЛ -->
     <audio id="bg-music" loop src="TRIXXXVD, DORMIRES — Catch Me If You Can (www.lightaudio.ru).mp3"></audio>
     <audio id="scream-audio" src="five-nights-at-freddys-full-stream-sound_2.mp3"></audio>
 
     <script>
-        let audioUnlocked = false;
+        let isReady = false;
 
-        // Разблокировка звука при первом клике по сайту
+        // Разблокировка для браузера по первому клику на фон
         function unlockAudio() {
-            if (!audioUnlocked) {
-                const scream = document.getElementById('scream-audio');
-                const music = document.getElementById('bg-music');
-                
-                // Прогружаем звуки вхолостую
-                scream.play().then(() => { scream.pause(); scream.currentTime = 0; });
-                music.play().then(() => { music.pause(); music.currentTime = 0; });
-                
-                audioUnlocked = true;
-                console.log("Звук разблокирован Артемием!");
+            if (!isReady) {
+                // "Прогреваем" звуки, чтобы браузер их разрешил
+                document.getElementById('scream-audio').load();
+                document.getElementById('bg-music').load();
+                isReady = true;
+                console.log("Артемий разблокировал систему!");
             }
         }
 
-        // Показываем рекламу через 4 секунды
         setTimeout(() => {
             document.getElementById('ad-box').style.display = 'block';
         }, 4000);
 
-        function triggerScreamer() {
-            const screamer = document.getElementById('screamer');
-            const screamSound = document.getElementById('scream-audio');
-            const bgMusic = document.getElementById('bg-music');
+        function startScreamer() {
+            const scream = document.getElementById('scream-audio');
+            const music = document.getElementById('bg-music');
+            const screen = document.getElementById('screamer');
 
             document.getElementById('ad-box').style.display = 'none';
-
-            // Резкий старт скримера
-            screamer.style.display = 'flex';
+            screen.style.display = 'flex';
             document.body.style.overflow = 'hidden';
-            
-            screamSound.volume = 1.0;
-            screamSound.play();
 
-            // Исчезает через 1.2 секунды
+            // ОРЕМ СКРИМЕРОМ
+            scream.currentTime = 0;
+            scream.play();
+
             setTimeout(() => {
-                screamer.style.display = 'none';
+                screen.style.display = 'none';
                 document.body.style.overflow = 'auto';
-                bgMusic.play(); // Музыка ПОСЛЕ скримера
+                // ТОЛЬКО ТЕПЕРЬ ВКЛЮЧАЕМ МУЗЫКУ
+                music.play();
             }, 1200);
         }
     </script>
