@@ -1,3 +1,4 @@
+html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -6,9 +7,9 @@
     <style>
         body { background: #000; color: #fff; text-align: center; font-family: 'Courier New', monospace; padding: 50px; border: 15px double red; min-height: 90vh; }
         h1 { color: red; font-size: 3em; text-shadow: 0 0 20px red; }
-        img { max-width: 500px; border: 5px solid white; margin: 20px; }
+        img { max-width: 500px; border: 5px solid white; margin: 20px; display: block; margin-left: auto; margin-right: auto; }
         #tractor { display: none; width: 300px; position: fixed; bottom: 10%; left: 35%; z-index: 100; }
-        button { background: red; color: white; padding: 20px; font-weight: bold; border: none; cursor: pointer; font-size: 1.5em; }
+        button { background: red; color: white; padding: 20px; font-weight: bold; border: none; cursor: pointer; font-size: 1.5em; margin: 20px; }
         .back { margin-top: 50px; display: block; color: gray; text-decoration: none; }
     </style>
 </head>
@@ -16,16 +17,15 @@
 
     <h1>АНТОН ЧУГУН НИКОГО НЕ УБИВАЛ!!!!!!!</h1>
     
-    <!-- Замени chigur.jpg на название своего файла с Антоном -->
-   <img src="ANTONCHIGYN" alt="Антон">
-    <br>
+    <!-- Главное фото Антона -->
+    <img src="ANTONCHIGYN" alt="Антон">
+
     <button onclick="summonTractor()">ПРИЗВАТЬ ТРАКТОР</button>
 
-    <!-- Замени tractor.png на название своего файла с трактором -->
-  <img id="tractor" src="maxresdefault.jpg" alt="Трактор">
+    <!-- Трактор -->
+    <img id="tractor" src="maxresdefault.jpg" alt="Трактор">
 
-    <!-- Музыка (ссылка на аудиофайл) -->
- <audio id="music" src="https://www.myinstants.com"></audio>
+    <audio id="music" src="https://www.myinstants.com"></audio>
 
     <a href="index.html" class="back">Вернуться к Артемию Всевластному</a>
 
