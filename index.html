@@ -80,20 +80,20 @@
 
     <script>
         const audio = document.getElementById("bg-music");
+       const audio = document.getElementById("bg-music");
         const btn = document.getElementById("musicBtn");
 
         function toggleMusic() {
             if (audio.paused) {
-                audio.play();
-                btn.innerText = "⏸ ПАУЗА";
-                btn.style.background = "#ff00ff";
+                audio.play().then(() => {
+                    btn.innerText = "⏸ ПАУЗА";
+                    btn.style.background = "#ff00ff";
+                }).catch(e => alert("Браузер блокирует звук! Нажми ещё раз."));
             } else {
                 audio.pause();
                 btn.innerText = "🎵 ВКЛЮЧИТЬ МУЗЫКУ";
                 btn.style.background = "rgba(255, 0, 255, 0.2)";
             }
         }
-    </script>
-
 </body>
 </html>
