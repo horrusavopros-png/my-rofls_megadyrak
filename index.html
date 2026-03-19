@@ -16,7 +16,7 @@
             box-sizing: border-box;
         }
 
-        /* Кнопка "X" вместо кругляшка */
+        /* Кнопка "X" ПРИЗВАТЬ АНТОНА */
         .anton-caller {
             position: fixed; top: 20px; left: 20px;
             z-index: 1000; text-align: center;
@@ -32,7 +32,6 @@
         .cross-btn:hover { transform: rotate(90deg) scale(1.1); background: #fff; }
         .btn-label { font-size: 10px; color: #ff0000; font-weight: bold; margin-top: 5px; display: block; }
 
-        /* Трактор */
         #tractor {
             display: none; position: fixed; top: 30px; right: 30px; width: 130px;
             filter: drop-shadow(0 0 15px #ff00ff); z-index: 100;
@@ -40,7 +39,6 @@
         }
         @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
 
-        /* Плашка Рекламы */
         #ad-box {
             position: fixed; bottom: 30px; left: 30px; width: 320px;
             background: #fff; color: #000; border-left: 12px solid red;
@@ -53,7 +51,7 @@
             cursor: pointer; font-weight: bold; border-radius: 6px; width: 100%; margin-top: 15px;
         }
 
-        /* СКРИМЕР */
+        /* СКРИМЕР НА ВЕСЬ ЭКРАН */
         #screamer {
             display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background: black; z-index: 9999; justify-content: center; align-items: center;
@@ -64,19 +62,18 @@
         }
         @keyframes shake {
             0% { transform: scale(1.1) translate(5px, 5px); }
-            50% { transform: scale(1.2) translate(-5px, -5px); }
+            50% { transform: scale(1.3) translate(-10px, -10px); }
             100% { transform: scale(1.1) translate(5px, -5px); }
         }
 
-        h1 { font-size: 3.5em; text-shadow: 0 0 25px #8a2be2; margin-top: 60px; }
-        .card { background: rgba(255, 255, 255, 0.03); border-radius: 25px; padding: 40px; max-width: 550px; margin: 40px auto; border: 1px solid rgba(138, 43, 226, 0.3); }
+        h1 { font-size: 3em; text-shadow: 0 0 25px #8a2be2; margin-top: 60px; }
+        .card { background: rgba(255, 255, 255, 0.03); border-radius: 25px; padding: 30px; max-width: 500px; margin: 40px auto; border: 1px solid rgba(138, 43, 226, 0.3); }
         .main-img { width: 100%; border-radius: 20px; }
-        .go-btn { background: #ffcc00; color: #000; padding: 18px 45px; font-weight: 900; border-radius: 50px; text-decoration: none; display: inline-block; margin: 25px; }
+        .go-btn { background: #ffcc00; color: #000; padding: 15px 40px; font-weight: 900; border-radius: 50px; text-decoration: none; display: inline-block; margin: 20px; }
     </style>
 </head>
-<body onclick="unlockAllAudio()">
+<body onclick="startEngine()">
 
-    <!-- Новая кнопка призвать Антона -->
     <div class="anton-caller">
         <div class="cross-btn" onclick="showTractor()"></div>
         <span class="btn-label">ПРИЗВАТЬ АНТОНА</span>
@@ -101,26 +98,27 @@
     <a href="anton.html" class="go-btn">РАЗГОВОР С АНТОНОМ</a>
 
     <div class="card">
-        <img src="photo_2024-09-13_10-19-47 (2).jpg" class="main-img">
+        <img src="photo_2024-09-13_10-19-47 (2).jpg" class="main-photo">
     </div>
 
-    <!-- Аудио. ПРОВЕРЬ: Название файла должно быть в точности как на скриншоте -->
-    <audio id="scream-sound" preload="auto">
-        <source src="five-nights-at-freddys-full-stream-sound_2.mp3" type="audio/mpeg">
+    <!-- Обновленное короткое название файла -->
+    <audio id="scream-audio" preload="auto">
+        <source src="scream.mp3" type="audio/mpeg">
     </audio>
 
     <script>
-        let isAudioUnlocked = false;
+        let isReady = false;
+        const scream = document.getElementById('scream-audio');
 
-        // Разблокировка звука при первом клике на страницу
-        function unlockAllAudio() {
-            if (!isAudioUnlocked) {
-                const scream = document.getElementById('scream-sound');
+        // Функция "прогрева" звука
+        function startEngine() {
+            if (!isReady) {
                 scream.play().then(() => {
                     scream.pause();
                     scream.currentTime = 0;
-                    isAudioUnlocked = true;
-                }).catch(e => console.log("Ждем клика"));
+                    isReady = true;
+                    console.log("Звук заряжен!");
+                }).catch(e => console.log("Нужен клик"));
             }
         }
 
@@ -134,19 +132,17 @@
         }, 4000);
 
         function triggerScreamer() {
-            const scream = document.getElementById('scream-sound');
-            const screen = document.getElementById('screamer');
-
+            const sc = document.getElementById('screamer');
+            
             document.getElementById('ad-box').style.display = 'none';
-            screen.style.display = 'flex';
+            sc.style.display = 'flex';
 
-            // Громкий запуск звука
+            // Громкий старт
             scream.volume = 1.0;
-            scream.currentTime = 0;
             scream.play();
 
             setTimeout(() => {
-                screen.style.display = 'none';
+                sc.style.display = 'none';
             }, 1500);
         }
     </script>
