@@ -13,8 +13,7 @@
             padding: 40px 20px;
             border: 10px solid;
             border-image: linear-gradient(45deg, #8a2be2, #ff00ff, #4b0082, #9400d3) 1;
-            min-height: 95vh;
-            overflow: hidden; /* Чтобы не было прокрутки во время скримера */
+            min-height: 150vh; /* Теперь сайт длинный, можно крутить вниз */
         }
 
         /* Трактор */
@@ -43,10 +42,9 @@
             border: 4px solid red;
             border-radius: 15px;
             padding: 15px;
-            z-index: 200;
+            z-index: 500;
             box-shadow: 0 0 30px rgba(255,0,0,0.7);
             display: none;
-            font-family: Arial, sans-serif;
             text-align: left;
         }
         .ad-content img { width: 80px; float: left; margin-right: 15px; border-radius: 10px; border: 2px solid #000; }
@@ -56,7 +54,7 @@
             font-size: 1.1em;
         }
 
-        /* СКРИМЕР - ТЕПЕРЬ ВЫЛЕТАЕТ */
+        /* СКРИМЕР - ПОЛНОЭКРАННЫЙ */
         #screamer {
             display: none;
             position: fixed;
@@ -68,21 +66,22 @@
             align-items: center;
         }
         #screamer img { 
-            height: 100vh; 
-            width: auto; 
-            animation: jumpscare 0.3s ease-out; /* Анимация вылета */
+            height: 100%; 
+            width: 100%; 
+            object-fit: cover; /* Чтобы фотка была на ВЕСЬ экран */
+            animation: jumpscare 0.2s ease-out;
         }
 
         @keyframes jumpscare {
-            0% { transform: scale(0.1); opacity: 0; }
-            100% { transform: scale(1.2); opacity: 1; }
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
         h1 { font-size: 3.5em; text-shadow: 0 0 20px #8a2be2; }
         .meme-box { background: rgba(45,0,89,0.6); border: 2px solid #ff00ff; border-radius: 30px; padding: 20px; max-width: 600px; margin: 40px auto; backdrop-filter: blur(10px); }
         img.main-artem { max-width: 100%; border-radius: 20px; }
         .yellow-btn { background: yellow; color: #000; padding: 15px 30px; font-weight: 900; border-radius: 50px; text-decoration: none; display: inline-block; margin: 20px; }
-        .footer { margin-top: 60px; font-size: 1.4em; color: #ff00ff; }
+        .footer { margin-top: 100px; font-size: 1.4em; color: #ff00ff; }
     </style>
 </head>
 <body>
@@ -93,14 +92,13 @@
     <div id="ad-box">
         <div class="ad-content">
             <img src="photo_2024-09-13_10-19-47 (2).jpg">
-            <p style="margin: 0; font-size: 0.9em;"><b>СРОЧНО!</b> Артемий сексуальный в 30 метрах от вас!</p>
+            <p style="margin: 0; font-size: 0.9em; font-family: Arial;"><b>СРОЧНО!</b> Артемий сексуальный в 30 метрах от вас!</p>
             <button class="ad-btn" onclick="startScreamer()">ОТВЕТИТЬ</button>
         </div>
     </div>
 
     <!-- ОКНО СКРИМЕРА -->
     <div id="screamer">
-        <!-- Твоя фотка для скримера -->
         <img src="photo_2024-09-13_10-19-47 (2).jpg">
     </div>
 
@@ -117,40 +115,39 @@
     <!-- МУЗЫКА -->
     <audio id="bg-music" loop src="TRIXXXVD, DORMIRES — Catch Me If You Can (www.lightaudio.ru).mp3"></audio>
     
-    <!-- ЗВУК СКРИМЕРА - Исправил тег и путь -->
-    <audio id="scream-sound" preload="auto">
+    <!-- ЗВУК СКРИМЕРА -->
+    <audio id="scream-sound">
         <source src="five-nights-at-freddys-full-stream-sound_2.mp3" type="audio/mpeg">
     </audio>
 
     <script>
-        // Показываем плашку через 4 секунды
+        // Показываем плашку через 3 секунды
         setTimeout(() => {
             document.getElementById('ad-box').style.display = 'block';
-        }, 4000);
-
-        // Музыка теперь НЕ включается при клике на body.
-        // Она включится только когда нажмут кнопку "ОТВЕТИТЬ".
+        }, 3000);
 
         function startScreamer() {
             const screamer = document.getElementById('screamer');
             const screamSound = document.getElementById('scream-sound');
             const bgMusic = document.getElementById('bg-music');
             
-            // Прячем рекламу
+            // Убираем прокрутку, когда вылетает скример
+            document.body.style.overflow = 'hidden';
             document.getElementById('ad-box').style.display = 'none';
 
-            // Показываем скример (теперь он flex для центровки)
+            // Включаем скример
             screamer.style.display = 'flex';
             
-            // Пытаемся громко включить звук скримера
-            screamSound.volume = 1.0;
-            screamSound.play().catch(e => alert("Кликни на страницу еще раз, чтобы звук заработал!"));
+            // Запуск звука
+            screamSound.currentTime = 0;
+            screamSound.play().catch(e => console.log("Нужен клик по кнопке"));
 
-            // Скример исчезает через 1.2 секунды и ВКЛЮЧАЕТСЯ фоновая музыка
+            // Скример исчезает через 1.5 сек
             setTimeout(() => {
                 screamer.style.display = 'none';
-                bgMusic.play().catch(e => {}); // Музыка стартует ПОСЛЕ скримера
-            }, 1200);
+                document.body.style.overflow = 'auto'; // Возвращаем прокрутку
+                bgMusic.play().catch(e => {}); // Запуск музыки ПОСЛЕ скримера
+            }, 1500);
         }
     </script>
 </body>
