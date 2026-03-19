@@ -2,45 +2,107 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>ПРАВДА ОБ АНТОНЕ</title>
+    <title>РАЗГОВОР С АНТОНОМ</title>
     <style>
         body { 
-            background: radial-gradient(circle, #2b0000 0%, #000000 100%); 
-            color: #fff; text-align: center; font-family: sans-serif; 
-            padding: 50px; margin: 0; border: 5px solid #ff0000; min-height: 100vh;
+            background: #0a0a0a; 
+            color: #fff; 
+            text-align: center; 
+            font-family: 'Courier New', monospace; 
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
         }
-        h1 { color: #ff0000; font-size: 3em; text-shadow: 0 0 15px #ff0000; }
-        .main-img { max-width: 450px; border: 3px solid #ff0000; border-radius: 20px; box-shadow: 0 0 30px #ff0000; }
-        .summon-btn { 
-            background: #ff0000; color: white; padding: 20px 40px; 
-            font-weight: bold; border: none; border-radius: 50px;
-            cursor: pointer; font-size: 1.5em; margin: 30px; box-shadow: 0 0 20px #ff0000;
+
+        /* Окошко в стиле модерн/минимализм */
+        .chat-window {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 0 50px rgba(255, 0, 0, 0.2);
+            max-width: 600px;
+            width: 90%;
+            transition: 0.5s;
         }
-        #tractor { 
-            display: none; width: 350px; position: fixed; 
-            bottom: 20px; right: -500px; z-index: 1000;
-            transition: right 1s ease-out; 
+
+        .question {
+            font-size: 1.5em;
+            color: #888;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: underline;
         }
-        .back { margin-top: 50px; display: inline-block; color: #666; text-decoration: none; }
+        .question:hover { color: #fff; text-shadow: 0 0 10px #fff; }
+
+        /* Скрытые элементы разговора */
+        #chigur-zone {
+            display: none; /* Скрыто до клика */
+            margin-top: 20px;
+            animation: fadeIn 1.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .chigur-img {
+            max-width: 100%;
+            border-radius: 10px;
+            border: 2px solid red;
+            box-shadow: 0 0 20px red;
+            margin-bottom: 20px;
+        }
+
+        .answer {
+            color: red;
+            font-size: 1.8em;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px #000;
+        }
+
+        .back { position: absolute; bottom: 20px; color: #444; text-decoration: none; }
     </style>
 </head>
 <body>
-    <h1>АНТОН ЧУГУН НИКОГО НЕ УБИВАЛ!!!!!!!</h1>
-    <!-- ПРОВЕРЬ: если файл на GitHub называется ANTONCHIGYN.jpg, добавь .jpg в src -->
-    <img src="ANTONCHIGYN" alt="Антон" class="main-img">
-    <br>
-    <button class="summon-btn" onclick="summonTractor()">ПРИЗВАТЬ ТРАКТОР</button>
-    <img id="tractor" src="maxresdefault.jpg" alt="Трактор">
+
+    <div class="chat-window">
+        <!-- Кнопка-вопрос -->
+        <div id="ask-btn" class="question" onclick="startTalk()">— Как дела?</div>
+
+        <!-- Появляющаяся зона с Антоном -->
+        <div id="chigur-zone">
+            <img src="ANTONCHIGYN" alt="Антон" class="chigur-img">
+            <div class="answer">А твоё какое дело.... дружок.</div>
+        </div>
+    </div>
+
+    <!-- Трактор и музыка остаются (скрыты) -->
+    <img id="tractor" src="maxresdefault.jpg" style="display:none; width: 200px; position: fixed; bottom: 10px; right: 10px;">
     <audio id="music" src="https://www.myinstants.com"></audio>
-    <a href="index.html" class="back">← Вернуться к Артемию Всевластному</a>
+
+    <a href="index.html" class="back">← уйти, пока цел</a>
+
     <script>
-        function summonTractor() {
-            const tractor = document.getElementById('tractor');
+        function startTalk() {
+            // Прячем вопрос
+            document.getElementById('ask-btn').style.display = 'none';
+            
+            // Показываем Антона
+            const zone = document.getElementById('chigur-zone');
+            zone.style.display = 'block';
+
+            // Можно добавить музыку или звук для атмосферы
             const music = document.getElementById('music');
-            tractor.style.display = 'block';
-            setTimeout(() => { tractor.style.right = '10%'; }, 100);
             music.play();
         }
     </script>
+
 </body>
 </html>
