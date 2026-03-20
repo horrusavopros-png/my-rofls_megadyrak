@@ -11,26 +11,16 @@
             background: radial-gradient(circle at center, #1a0033 0%, #05000a 100%); 
             color: #e0b0ff; 
             font-family: 'Segoe UI', sans-serif;
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            border: 10px solid #8a2be2;
-            overflow-x: hidden;
+            margin: 0; padding: 0; min-height: 100vh;
+            display: flex; flex-direction: column; align-items: center;
+            border: 10px solid #8a2be2; overflow-x: hidden;
         }
 
-        .anton-caller {
-            position: fixed; top: 20px; left: 20px;
-            z-index: 1000; text-align: center;
-        }
+        .anton-caller { position: fixed; top: 20px; left: 20px; z-index: 1000; text-align: center; }
         .cross-btn {
-            width: 50px; height: 50px;
-            background: #ff0000;
+            width: 50px; height: 50px; background: #ff0000;
             clip-path: polygon(20% 0%, 0% 20%, 30% 50%, 0% 80%, 20% 100%, 50% 70%, 80% 100%, 100% 80%, 70% 50%, 100% 20%, 80% 0%, 50% 30%);
-            cursor: pointer;
-            box-shadow: 0 0 15px #ff0000;
+            cursor: pointer; box-shadow: 0 0 15px #ff0000;
         }
         .btn-label { font-size: 10px; color: #ff0000; font-weight: bold; margin-top: 5px; display: block; }
 
@@ -41,83 +31,36 @@
         }
         @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
-        .container {
-            max-width: 600px;
-            width: 90%;
-            padding: 60px 0;
-            z-index: 10;
-            text-align: center;
-        }
-
+        .container { max-width: 600px; width: 90%; padding: 60px 0; z-index: 10; text-align: center; }
         h1 { font-size: 2.5em; text-shadow: 0 0 20px #8a2be2; margin-bottom: 20px; }
 
-        .go-btn { 
-            background: #ffcc00; color: #000; padding: 15px 30px; 
-            font-weight: 900; border-radius: 50px; text-decoration: none; 
-            display: inline-block; margin-bottom: 30px; font-size: 1.1em;
-        }
+        .go-btn { background: #ffcc00; color: #000; padding: 15px 30px; font-weight: 900; border-radius: 50px; text-decoration: none; display: inline-block; margin-bottom: 30px; font-size: 1.1em; }
 
         /* Кнопка IP */
         .ip-btn {
-            background: #ff0000;
-            color: #fff;
-            padding: 15px 25px;
-            font-weight: bold;
-            border: 2px solid #fff;
-            border-radius: 10px;
-            cursor: pointer;
-            margin: 20px;
-            font-family: 'Courier New', monospace;
-            box-shadow: 0 0 15px #ff0000;
-            transition: 0.3s;
+            background: #ff0000; color: #fff; padding: 15px 25px; font-weight: bold;
+            border: 2px solid #fff; border-radius: 10px; cursor: pointer; margin: 20px;
+            font-family: 'Courier New', monospace; box-shadow: 0 0 15px #ff0000; transition: 0.3s;
         }
         .ip-btn:hover { background: #fff; color: #ff0000; transform: scale(1.1); }
 
         #ip-display {
-            display: none;
-            background: rgba(255, 0, 0, 0.2);
-            border: 1px solid red;
-            padding: 15px;
-            margin: 10px auto;
-            border-radius: 10px;
-            color: #ff4444;
-            font-weight: bold;
-            animation: flicker 0.1s infinite;
+            display: none; background: rgba(255, 0, 0, 0.2); border: 1px solid red;
+            padding: 15px; margin: 10px auto; border-radius: 10px; color: #ff4444;
+            font-weight: bold; animation: flicker 0.1s infinite;
         }
         @keyframes flicker { 0% { opacity: 1; } 50% { opacity: 0.8; } 100% { opacity: 1; } }
 
-        .card { 
-            background: rgba(255, 255, 255, 0.05); 
-            border: 1px solid #8a2be2;
-            border-radius: 25px; 
-            padding: 20px; 
-            box-shadow: 0 0 30px rgba(0,0,0,0.5);
-            margin-top: 20px;
-        }
+        .card { background: rgba(255, 255, 255, 0.05); border: 1px solid #8a2be2; border-radius: 25px; padding: 20px; box-shadow: 0 0 30px rgba(0,0,0,0.5); margin-top: 20px; }
         .main-img { width: 100%; border-radius: 15px; display: block; }
 
-        #ad-box {
-            position: fixed; bottom: 20px; left: 20px; width: 280px;
-            background: #fff; color: #000; border-left: 10px solid red;
-            border-radius: 12px; padding: 15px; z-index: 500;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); display: none;
-        }
+        #ad-box { position: fixed; bottom: 20px; left: 20px; width: 280px; background: #fff; color: #000; border-left: 10px solid red; border-radius: 12px; padding: 15px; z-index: 500; box-shadow: 0 10px 30px rgba(0,0,0,0.5); display: none; }
         .ad-content img { width: 60px; height: 60px; float: left; margin-right: 12px; border-radius: 50%; }
         .ad-btn { background: red; color: white; border: none; padding: 10px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 10px; border-radius: 5px; }
 
-        #screamer {
-            display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: black; z-index: 9999; justify-content: center; align-items: center;
-        }
-        #screamer img { 
-            width: 100%; height: 100%; object-fit: cover;
-            animation: shake 0.1s infinite;
-        }
-        @keyframes shake {
-            0% { transform: scale(1.1) translate(5px, 5px); }
-            50% { transform: scale(1.15) translate(-5px, -5px); }
-            100% { transform: scale(1.1) translate(5px, -5px); }
-        }
+        #screamer { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: black; z-index: 9999; justify-content: center; align-items: center; }
+        #screamer img { width: 100%; height: 100%; object-fit: cover; animation: shake 0.1s infinite; }
+        @keyframes shake { 0% { transform: scale(1.1) translate(5px, 5px); } 50% { transform: scale(1.15) translate(-5px, -5px); } 100% { transform: scale(1.1) translate(5px, -5px); } }
 
         .footer { margin-top: 40px; font-weight: bold; color: #8a2be2; }
     </style>
@@ -133,10 +76,8 @@
 
     <div class="container">
         <h1>Самые умные дураки здесь!</h1>
-        
         <a href="anton.html" class="go-btn">РАЗГОВОР С АНТОНОМ</a>
 
-        <!-- КНОПКА IP -->
         <div>
             <button class="ip-btn" onclick="getIpAddress()">УЗНАТЬ ПРАВДУ О СЕБЕ</button>
             <div id="ip-display"></div>
@@ -180,24 +121,37 @@
             }
         }
 
+        // ИСПРАВЛЕННАЯ ФУНКЦИЯ IP
         function getIpAddress() {
             const display = document.getElementById('ip-display');
             display.style.display = 'block';
-            display.innerText = "ИЩУ ТВОЙ СЛЕД...";
+            display.innerText = "ВЗЛАМЫВАЮ ТВОЮ СЕТЬ...";
 
+            // Пробуем первый сервис
             fetch('https://api.ipify.org')
                 .then(response => response.json())
                 .then(data => {
-                    display.innerHTML = `
-                        ТВОЙ IP: ${data.ip} <br><br>
-                        <span style="font-size: 1.2em; color: white;">У ТЕБЯ ЧАС НА ИЗВИНЕНИЯ... ПЕРЕД АРТЕМИЕМ.</span>
-                    `;
-                    scream.volume = 1.0;
-                    scream.play(); 
+                    showResult(data.ip);
                 })
-                .catch(err => {
-                    display.innerText = "ТЫ СЛИШКОМ ХОРОШО ПРЯЧЕШЬСЯ... НО АРТЕМИЙ ТЕБЯ НАЙДЕТ.";
+                .catch(() => {
+                    // Если первый упал, пробуем второй (ipapi.co)
+                    fetch('https://ipapi.co')
+                        .then(res => res.json())
+                        .then(data => showResult(data.ip))
+                        .catch(() => {
+                            display.innerText = "ТЫ СЛИШКОМ ХОРОШО ПРЯЧЕШЬСЯ... НО АРТЕМИЙ ТЕБЯ НАЙДЕТ.";
+                        });
                 });
+        }
+
+        function showResult(ip) {
+            const display = document.getElementById('ip-display');
+            display.innerHTML = `
+                ТВОЙ IP: ${ip} <br><br>
+                <span style="font-size: 1.2em; color: white;">У ТЕБЯ ЧАС НА ИЗВИНЕНИЯ... ПЕРЕД АРТЕМИЕМ.</span>
+            `;
+            scream.volume = 1.0;
+            scream.play();
         }
 
         function showTractor() {
