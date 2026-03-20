@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>РАЗГОВОР С АНТОНОМ</title>
+    <title>РАЗГОВОР С ПИКСЕЛЬНЫМ АНТОНОМ</title>
     <style>
         body { 
             background: #0a0a0a; 
@@ -24,7 +24,7 @@
             border: 1px solid #333;
             border-radius: 15px;
             padding: 40px;
-            box-shadow: 0 0 50px rgba(255, 0, 0, 0.2);
+            box-shadow: 0 0 50px rgba(255, 0, 0, 0.3);
             max-width: 600px;
             width: 90%;
             transition: 0.5s;
@@ -41,22 +41,25 @@
 
         /* Скрытые элементы разговора */
         #chigur-zone {
-            display: none; /* Скрыто до клика */
+            display: none; 
             margin-top: 20px;
-            animation: fadeIn 1.5s ease-in;
+            animation: fadeIn 0.5s steps(4); /* Пиксельная анимация появления */
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.9); }
+            from { opacity: 0; transform: scale(0.8); }
             to { opacity: 1; transform: scale(1); }
         }
 
         .chigur-img {
             max-width: 100%;
-            border-radius: 10px;
+            border-radius: 5px;
             border: 2px solid red;
             box-shadow: 0 0 20px red;
             margin-bottom: 20px;
+            /* МАГИЯ ПИКСЕЛЕЙ ТУТ */
+            image-rendering: pixelated; 
+            width: 350px; 
         }
 
         .answer {
@@ -78,8 +81,8 @@
 
         <!-- Появляющаяся зона с Антоном -->
         <div id="chigur-zone">
-            <!-- Убедись, что название картинки в src совпадает с тем, что на GitHub -->
-            <img src="ANTONCHIGYN" alt="Антон" class="chigur-img">
+            <!-- ТВОЯ НОВАЯ ПИКСЕЛЬНАЯ ФОТКА -->
+            <img src="pixel-chigur.jpg" alt="Антон" class="chigur-img">
             <div class="answer">А твоё какое дело.... дружок.</div>
         </div>
     </div>
@@ -87,7 +90,7 @@
     <!-- Трактор (скрыт) -->
     <img id="tractor" src="maxresdefault.jpg" style="display:none; width: 200px; position: fixed; bottom: 10px; right: 10px;">
     
-    <!-- ТУТ Я ВСТАВИЛ ТВОЙ ГОЛОС -->
+    <!-- ГОЛОС -->
     <audio id="music" src="a-tvoio-kakoe-delo-druzhok_WYWwaQ7.mp3"></audio>
 
     <a href="index.html" class="back">← уйти, пока цел</a>
