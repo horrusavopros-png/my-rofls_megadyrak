@@ -36,7 +36,6 @@
 
         .go-btn { background: #ffcc00; color: #000; padding: 15px 30px; font-weight: 900; border-radius: 50px; text-decoration: none; display: inline-block; margin-bottom: 30px; font-size: 1.1em; }
 
-        /* Кнопка IP */
         .ip-btn {
             background: #ff0000; color: #fff; padding: 15px 25px; font-weight: bold;
             border: 2px solid #fff; border-radius: 10px; cursor: pointer; margin: 20px;
@@ -79,7 +78,6 @@
         
         <a href="anton.html" class="go-btn">РАЗГОВОР С АНТОНОМ</a>
 
-        <!-- КНОПКА IP -->
         <div>
             <button class="ip-btn" onclick="getIpAddress()">УЗНАТЬ ПРАВДУ О СЕБЕ</button>
             <div id="ip-display"></div>
@@ -123,21 +121,24 @@
             }
         }
 
-        // ПОЛНОСТЬЮ ИСПРАВЛЕННАЯ ФУНКЦИЯ
+        // НОВАЯ ФУНКЦИЯ ЧЕРЕЗ CLOUDFLARE
         function getIpAddress() {
             const display = document.getElementById('ip-display');
             display.style.display = 'block';
             display.innerText = "ВЗЛАМЫВАЮ ТВОЮ СЕТЬ...";
 
-            // Попытка 1 через ipify
-            fetch('https://api.ipify.org')
-                .then(response => response.json())
+            fetch('https://www.cloudflare.com')
+                .then(res => res.text())
                 .then(data => {
-                    showResult(data.ip);
+                    // Извлекаем IP из текстового ответа
+                    const lines = data.split('\n');
+                    const ipLine = lines.find(line => line.startsWith('ip='));
+                    const ip = ipLine.split('=')[1];
+                    showResult(ip);
                 })
                 .catch(() => {
-                    // Попытка 2 через ipapi.co (запасная)
-                    fetch('https://ipapi.co')
+                    // Если Cloudflare не помог, пробуем ipify
+                    fetch('https://api.ipify.org')
                         .then(res => res.json())
                         .then(data => showResult(data.ip))
                         .catch(() => {
