@@ -18,7 +18,7 @@
             overflow: hidden;
         }
 
-        /* Окошко в стиле модерн/минимализм */
+        /* Окошко в стиле модерн */
         .chat-window {
             background: #1a1a1a;
             border: 1px solid #333;
@@ -39,11 +39,11 @@
         }
         .question:hover { color: #fff; text-shadow: 0 0 10px #fff; }
 
-        /* Скрытые элементы разговора */
+        /* Появление Антона */
         #chigur-zone {
             display: none; 
             margin-top: 20px;
-            animation: fadeIn 0.5s steps(4); /* Пиксельная анимация появления */
+            animation: fadeIn 0.5s steps(4);
         }
 
         @keyframes fadeIn {
@@ -57,7 +57,7 @@
             border: 2px solid red;
             box-shadow: 0 0 20px red;
             margin-bottom: 20px;
-            /* МАГИЯ ПИКСЕЛЕЙ ТУТ */
+            /* Эффект пикселей */
             image-rendering: pixelated; 
             width: 350px; 
         }
@@ -79,34 +79,27 @@
         <!-- Кнопка-вопрос -->
         <div id="ask-btn" class="question" onclick="startTalk()">— Как дела?</div>
 
-        <!-- Появляющаяся зона с Антоном -->
+        <!-- Зона с Антоном -->
         <div id="chigur-zone">
-            <!-- ИСПРАВЛЕННОЕ НАЗВАНИЕ ФАЙЛА -->
-            <img src="chigur_pixel.jpg" alt="Антон" class="chigur-img">
+            <!-- ТОЧНОЕ НАЗВАНИЕ С ТВОЕГО СКРИНШОТА -->
+            <img src="chigur_pixel.jpg.jpg" alt="Антон" class="chigur-img">
             <div class="answer">А твоё какое дело.... дружок.</div>
         </div>
     </div>
 
-    <!-- Трактор (скрыт) -->
-    <img id="tractor" src="maxresdefault.jpg" style="display:none; width: 200px; position: fixed; bottom: 10px; right: 10px;">
-    
-    <!-- ГОЛОС -->
+    <!-- Голос -->
     <audio id="music" src="a-tvoio-kakoe-delo-druzhok_WYWwaQ7.mp3"></audio>
 
     <a href="index.html" class="back">← уйти, пока цел</a>
 
     <script>
         function startTalk() {
-            // Прячем вопрос
             document.getElementById('ask-btn').style.display = 'none';
-            
-            // Показываем Антона
-            const zone = document.getElementById('chigur-zone');
-            zone.style.display = 'block';
+            document.getElementById('chigur-zone').style.display = 'block';
 
-            // Запускаем звук голоса
             const music = document.getElementById('music');
-            music.play().catch(e => console.log("Нужен клик по странице"));
+            // Проверка: загружен ли звук
+            music.play().catch(e => console.log("Браузер ждет клика"));
         }
     </script>
 
