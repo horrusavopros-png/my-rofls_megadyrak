@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Логово Артемия Всевластного</title>
     <style>
-        /* Общие настройки — чтобы ничего не дергалось */
         * { box-sizing: border-box; }
         
         body { 
@@ -19,10 +18,9 @@
             flex-direction: column;
             align-items: center;
             border: 10px solid #8a2be2;
-            overflow-x: hidden; /* Запрет боковой прокрутки */
+            overflow-x: hidden;
         }
 
-        /* Кнопка "X" слева сверху */
         .anton-caller {
             position: fixed; top: 20px; left: 20px;
             z-index: 1000; text-align: center;
@@ -36,7 +34,6 @@
         }
         .btn-label { font-size: 10px; color: #ff0000; font-weight: bold; margin-top: 5px; display: block; }
 
-        /* Трактор справа сверху */
         #tractor {
             display: none; position: fixed; top: 20px; right: 20px; width: 120px;
             filter: drop-shadow(0 0 15px #ff00ff); z-index: 100;
@@ -44,12 +41,12 @@
         }
         @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
-        /* Центральный контент */
         .container {
             max-width: 600px;
             width: 90%;
             padding: 60px 0;
             z-index: 10;
+            text-align: center;
         }
 
         h1 { font-size: 2.5em; text-shadow: 0 0 20px #8a2be2; margin-bottom: 20px; }
@@ -58,8 +55,36 @@
             background: #ffcc00; color: #000; padding: 15px 30px; 
             font-weight: 900; border-radius: 50px; text-decoration: none; 
             display: inline-block; margin-bottom: 30px; font-size: 1.1em;
-            box-shadow: 0 5px 15px rgba(255, 204, 0, 0.3);
         }
+
+        /* Кнопка IP */
+        .ip-btn {
+            background: #ff0000;
+            color: #fff;
+            padding: 15px 25px;
+            font-weight: bold;
+            border: 2px solid #fff;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 20px;
+            font-family: 'Courier New', monospace;
+            box-shadow: 0 0 15px #ff0000;
+            transition: 0.3s;
+        }
+        .ip-btn:hover { background: #fff; color: #ff0000; transform: scale(1.1); }
+
+        #ip-display {
+            display: none;
+            background: rgba(255, 0, 0, 0.2);
+            border: 1px solid red;
+            padding: 15px;
+            margin: 10px auto;
+            border-radius: 10px;
+            color: #ff4444;
+            font-weight: bold;
+            animation: flicker 0.1s infinite;
+        }
+        @keyframes flicker { 0% { opacity: 1; } 50% { opacity: 0.8; } 100% { opacity: 1; } }
 
         .card { 
             background: rgba(255, 255, 255, 0.05); 
@@ -67,21 +92,19 @@
             border-radius: 25px; 
             padding: 20px; 
             box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            margin-top: 20px;
         }
         .main-img { width: 100%; border-radius: 15px; display: block; }
 
-        /* Рекламная плашка */
         #ad-box {
             position: fixed; bottom: 20px; left: 20px; width: 280px;
             background: #fff; color: #000; border-left: 10px solid red;
             border-radius: 12px; padding: 15px; z-index: 500;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5); display: none;
-            text-align: left;
         }
         .ad-content img { width: 60px; height: 60px; float: left; margin-right: 12px; border-radius: 50%; }
         .ad-btn { background: red; color: white; border: none; padding: 10px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 10px; border-radius: 5px; }
 
-        /* СКРИМЕР */
         #screamer {
             display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background: black; z-index: 9999; justify-content: center; align-items: center;
@@ -101,7 +124,6 @@
 </head>
 <body onclick="unlockAudio()">
 
-    <!-- Кнопка призвать Антона -->
     <div class="anton-caller">
         <div class="cross-btn" onclick="showTractor()"></div>
         <span class="btn-label">ПРИЗВАТЬ АНТОНА</span>
@@ -114,6 +136,12 @@
         
         <a href="anton.html" class="go-btn">РАЗГОВОР С АНТОНОМ</a>
 
+        <!-- КНОПКА IP -->
+        <div>
+            <button class="ip-btn" onclick="getIpAddress()">УЗНАТЬ ПРАВДУ О СЕБЕ</button>
+            <div id="ip-display"></div>
+        </div>
+
         <div class="card">
             <p style="margin-bottom: 15px; font-weight: bold;">Артемий Всевластный:</p>
             <img src="photo_2024-09-13_10-19-47 (2).jpg" class="main-img">
@@ -122,16 +150,14 @@
         <p class="footer">Created by Artemy The Great</p>
     </div>
 
-    <!-- Реклама -->
     <div id="ad-box">
         <div class="ad-content">
             <img src="photo_2024-09-13_10-19-47 (2).jpg">
-            <p style="margin: 0; font-size: 0.9em; font-family: Arial;"><b>АРТЕМИЙ СЕКСУАЛЬНЫЙ</b> в 30 метрах от вас!</p>
+            <p style="margin: 0; font-size: 0.9em; font-family: Arial; text-align: left;"><b>АРТЕМИЙ СЕКСУАЛЬНЫЙ</b> в 30 метрах от вас!</p>
             <button class="ad-btn" onclick="triggerScreamer()">ОТВЕТИТЬ</button>
         </div>
     </div>
 
-    <!-- Скример -->
     <div id="screamer">
         <img src="photo_2024-09-13_10-19-47 (2).jpg">
     </div>
@@ -144,7 +170,6 @@
         let audioUnlocked = false;
         const scream = document.getElementById('scream-sound');
 
-        // Разблокировка звука при первом клике
         function unlockAudio() {
             if (!audioUnlocked) {
                 scream.play().then(() => {
@@ -153,6 +178,26 @@
                     audioUnlocked = true;
                 }).catch(e => console.log("Кликни для звука"));
             }
+        }
+
+        function getIpAddress() {
+            const display = document.getElementById('ip-display');
+            display.style.display = 'block';
+            display.innerText = "ИЩУ ТВОЙ СЛЕД...";
+
+            fetch('https://api.ipify.org')
+                .then(response => response.json())
+                .then(data => {
+                    display.innerHTML = `
+                        ТВОЙ IP: ${data.ip} <br><br>
+                        <span style="font-size: 1.2em; color: white;">У ТЕБЯ ЧАС НА ИЗВИНЕНИЯ... ПЕРЕД АРТЕМИЕМ.</span>
+                    `;
+                    scream.volume = 1.0;
+                    scream.play(); 
+                })
+                .catch(err => {
+                    display.innerText = "ТЫ СЛИШКОМ ХОРОШО ПРЯЧЕШЬСЯ... НО АРТЕМИЙ ТЕБЯ НАЙДЕТ.";
+                });
         }
 
         function showTractor() {
@@ -168,13 +213,9 @@
             document.getElementById('ad-box').style.display = 'none';
             const sc = document.getElementById('screamer');
             sc.style.display = 'flex';
-            
             scream.volume = 1.0;
             scream.play();
-
-            setTimeout(() => {
-                sc.style.display = 'none';
-            }, 1500);
+            setTimeout(() => { sc.style.display = 'none'; }, 1500);
         }
     </script>
 </body>
