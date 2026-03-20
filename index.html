@@ -76,8 +76,10 @@
 
     <div class="container">
         <h1>Самые умные дураки здесь!</h1>
+        
         <a href="anton.html" class="go-btn">РАЗГОВОР С АНТОНОМ</a>
 
+        <!-- КНОПКА IP -->
         <div>
             <button class="ip-btn" onclick="getIpAddress()">УЗНАТЬ ПРАВДУ О СЕБЕ</button>
             <div id="ip-display"></div>
@@ -121,20 +123,20 @@
             }
         }
 
-        // ИСПРАВЛЕННАЯ ФУНКЦИЯ IP
+        // ПОЛНОСТЬЮ ИСПРАВЛЕННАЯ ФУНКЦИЯ
         function getIpAddress() {
             const display = document.getElementById('ip-display');
             display.style.display = 'block';
             display.innerText = "ВЗЛАМЫВАЮ ТВОЮ СЕТЬ...";
 
-            // Пробуем первый сервис
+            // Попытка 1 через ipify
             fetch('https://api.ipify.org')
                 .then(response => response.json())
                 .then(data => {
                     showResult(data.ip);
                 })
                 .catch(() => {
-                    // Если первый упал, пробуем второй (ipapi.co)
+                    // Попытка 2 через ipapi.co (запасная)
                     fetch('https://ipapi.co')
                         .then(res => res.json())
                         .then(data => showResult(data.ip))
