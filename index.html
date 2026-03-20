@@ -121,29 +121,25 @@
             }
         }
 
-        // НОВАЯ ФУНКЦИЯ ЧЕРЕЗ CLOUDFLARE
+        // ИСПРАВЛЕННАЯ ФУНКЦИЯ ДЛЯ ВЫВОДА IP
         function getIpAddress() {
             const display = document.getElementById('ip-display');
             display.style.display = 'block';
             display.innerText = "ВЗЛАМЫВАЮ ТВОЮ СЕТЬ...";
 
-            fetch('https://www.cloudflare.com')
-                .then(res => res.text())
-                .then(data => {
-                    // Извлекаем IP из текстового ответа
-                    const lines = data.split('\n');
-                    const ipLine = lines.find(line => line.startsWith('ip='));
-                    const ip = ipLine.split('=')[1];
-                    showResult(ip);
+            // Используем рабочий API с форматом JSON
+            fetch('https://api.ipify.org')
+                .then(response => {
+                    if (!response.ok) throw new Error('Network error');
+                    return response.json();
                 })
-                .catch(() => {
-                    // Если Cloudflare не помог, пробуем ipify
-                    fetch('https://api.ipify.org')
-                        .then(res => res.json())
-                        .then(data => showResult(data.ip))
-                        .catch(() => {
-                            display.innerText = "ТЫ СЛИШКОМ ХОРОШО ПРЯЧЕШЬСЯ... НО АРТЕМИЙ ТЕБЯ НАЙДЕТ.";
-                        });
+                .then(data => {
+                    showResult(data.ip);
+                })
+                .catch(err => {
+                    console.error(err);
+                    display.innerText = "ТЫ СЛИШКОМ ХОРОШО ПРЯЧЕШЬСЯ... НО АРТЕМИЙ ТЕБЯ НАЙДЕТ.";
+                    scream.play();
                 });
         }
 
