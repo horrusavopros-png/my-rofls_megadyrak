@@ -2,174 +2,95 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Логово Артемия Всевластного</title>
+    <title>РАЗГОВОР С АНТОНОМ</title>
     <style>
-        * { box-sizing: border-box; }
-        
         body { 
-            background: radial-gradient(circle at center, #1a0033 0%, #05000a 100%); 
-            color: #e0b0ff; 
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0; padding: 0; min-height: 100vh;
-            display: flex; flex-direction: column; align-items: center;
-            border: 10px solid #8a2be2; overflow-x: hidden;
+            background: #0a0a0a; 
+            color: #fff; 
+            text-align: center; 
+            font-family: 'Courier New', monospace; 
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
         }
 
-        .anton-caller { position: fixed; top: 20px; left: 20px; z-index: 1000; text-align: center; }
-        .cross-btn {
-            width: 50px; height: 50px; background: #ff0000;
-            clip-path: polygon(20% 0%, 0% 20%, 30% 50%, 0% 80%, 20% 100%, 50% 70%, 80% 100%, 100% 80%, 70% 50%, 100% 20%, 80% 0%, 50% 30%);
-            cursor: pointer; box-shadow: 0 0 15px #ff0000;
+        .chat-window {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 0 50px rgba(255, 0, 0, 0.2);
+            max-width: 600px;
+            width: 90%;
         }
-        .btn-label { font-size: 10px; color: #ff0000; font-weight: bold; margin-top: 5px; display: block; }
 
-        #tractor {
-            display: none; position: fixed; top: 20px; right: 20px; width: 120px;
-            filter: drop-shadow(0 0 15px #ff00ff); z-index: 100;
-            animation: bounce 2s infinite ease-in-out;
+        .question {
+            font-size: 1.5em;
+            color: #888;
+            cursor: pointer;
+            text-decoration: underline;
         }
-        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
-        .container { max-width: 600px; width: 90%; padding: 60px 0; z-index: 10; text-align: center; }
-        h1 { font-size: 2.5em; text-shadow: 0 0 20px #8a2be2; margin-bottom: 20px; }
-
-        .go-btn { background: #ffcc00; color: #000; padding: 15px 30px; font-weight: 900; border-radius: 50px; text-decoration: none; display: inline-block; margin-bottom: 30px; font-size: 1.1em; }
-
-        .ip-btn {
-            background: #ff0000; color: #fff; padding: 15px 25px; font-weight: bold;
-            border: 2px solid #fff; border-radius: 10px; cursor: pointer; margin: 20px;
-            font-family: 'Courier New', monospace; box-shadow: 0 0 15px #ff0000; transition: 0.3s;
+        #chigur-zone {
+            display: none;
+            margin-top: 20px;
+            animation: fadeIn 1s ease-in;
         }
-        .ip-btn:hover { background: #fff; color: #ff0000; transform: scale(1.1); }
 
-        #ip-display {
-            display: none; background: rgba(255, 0, 0, 0.2); border: 1px solid red;
-            padding: 15px; margin: 10px auto; border-radius: 10px; color: #ff4444;
-            font-weight: bold; animation: flicker 0.1s infinite;
+        /* ЭФФЕКТ ПИКСЕЛЕЙ */
+        .chigur-img {
+            max-width: 100%;
+            border-radius: 10px;
+            border: 2px solid red;
+            /* Магия пикселизации */
+            image-rendering: pixelated; 
+            filter: contrast(150%) brightness(90%);
+            width: 300px; /* Сделаем чуть меньше, чтобы пиксели были крупнее */
         }
-        @keyframes flicker { 0% { opacity: 1; } 50% { opacity: 0.8; } 100% { opacity: 1; } }
 
-        .card { background: rgba(255, 255, 255, 0.05); border: 1px solid #8a2be2; border-radius: 25px; padding: 20px; box-shadow: 0 0 30px rgba(0,0,0,0.5); margin-top: 20px; }
-        .main-img { width: 100%; border-radius: 15px; display: block; }
+        @keyframes fadeIn {
+            from { opacity: 0; } to { opacity: 1; }
+        }
 
-        #ad-box { position: fixed; bottom: 20px; left: 20px; width: 280px; background: #fff; color: #000; border-left: 10px solid red; border-radius: 12px; padding: 15px; z-index: 500; box-shadow: 0 10px 30px rgba(0,0,0,0.5); display: none; }
-        .ad-content img { width: 60px; height: 60px; float: left; margin-right: 12px; border-radius: 50%; }
-        .ad-btn { background: red; color: white; border: none; padding: 10px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 10px; border-radius: 5px; }
+        .answer {
+            color: red;
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-top: 15px;
+        }
 
-        #screamer { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: black; z-index: 9999; justify-content: center; align-items: center; }
-        #screamer img { width: 100%; height: 100%; object-fit: cover; animation: shake 0.1s infinite; }
-        @keyframes shake { 0% { transform: scale(1.1) translate(5px, 5px); } 50% { transform: scale(1.15) translate(-5px, -5px); } 100% { transform: scale(1.1) translate(5px, -5px); } }
-
-        .footer { margin-top: 40px; font-weight: bold; color: #8a2be2; }
+        .back { position: absolute; bottom: 20px; color: #444; text-decoration: none; }
     </style>
 </head>
-<body onclick="unlockAudio()">
+<body>
 
-    <div class="anton-caller">
-        <div class="cross-btn" onclick="showTractor()"></div>
-        <span class="btn-label">ПРИЗВАТЬ АНТОНА</span>
-    </div>
+    <div class="chat-window">
+        <div id="ask-btn" class="question" onclick="startTalk()">— Как дела?</div>
 
-    <img id="tractor" src="maxresdefault.jpg">
-
-    <div class="container">
-        <h1>Самые умные дураки здесь!</h1>
-        
-        <a href="anton.html" class="go-btn">РАЗГОВОР С АНТОНОМ</a>
-
-        <div>
-            <button class="ip-btn" onclick="getIpAddress()">УЗНАТЬ ПРАВДУ О СЕБЕ</button>
-            <div id="ip-display"></div>
-        </div>
-
-        <div class="card">
-            <p style="margin-bottom: 15px; font-weight: bold;">Артемий Всевластный:</p>
-            <img src="photo_2024-09-13_10-19-47 (2).jpg" class="main-img">
-        </div>
-
-        <p class="footer">Created by Artemy The Great</p>
-    </div>
-
-    <div id="ad-box">
-        <div class="ad-content">
-            <img src="photo_2024-09-13_10-19-47 (2).jpg">
-            <p style="margin: 0; font-size: 0.9em; font-family: Arial; text-align: left;"><b>АРТЕМИЙ СЕКСУАЛЬНЫЙ</b> в 30 метрах от вас!</p>
-            <button class="ad-btn" onclick="triggerScreamer()">ОТВЕТИТЬ</button>
+        <div id="chigur-zone">
+            <!-- ТВОЯ НОВАЯ ФОТКА -->
+            <img src="chigur_pixel.jpg" alt="Антон" class="chigur-img">
+            <div class="answer">А твоё какое дело.... дружок.</div>
         </div>
     </div>
 
-    <div id="screamer">
-        <img src="photo_2024-09-13_10-19-47 (2).jpg">
-    </div>
+    <audio id="music" src="a-tvoio-kakoe-delo-druzhok_WYWwaQ7.mp3"></audio>
 
-    <audio id="scream-sound" preload="auto">
-        <source src="scream.mp3" type="audio/mpeg">
-    </audio>
+    <a href="index.html" class="back">← уйти, пока цел</a>
 
     <script>
-        let audioUnlocked = false;
-        const scream = document.getElementById('scream-sound');
+        function startTalk() {
+            document.getElementById('ask-btn').style.display = 'none';
+            document.getElementById('chigur-zone').style.display = 'block';
 
-        function unlockAudio() {
-            if (!audioUnlocked) {
-                scream.play().then(() => {
-                    scream.pause();
-                    scream.currentTime = 0;
-                    audioUnlocked = true;
-                }).catch(e => console.log("Кликни для звука"));
-            }
-        }
-
-        // ИСПРАВЛЕННАЯ ФУНКЦИЯ ДЛЯ ВЫВОДА IP
-        function getIpAddress() {
-            const display = document.getElementById('ip-display');
-            display.style.display = 'block';
-            display.innerText = "ВЗЛАМЫВАЮ ТВОЮ СЕТЬ...";
-
-            // Используем рабочий API с форматом JSON
-            fetch('https://api.ipify.org')
-                .then(response => {
-                    if (!response.ok) throw new Error('Network error');
-                    return response.json();
-                })
-                .then(data => {
-                    showResult(data.ip);
-                })
-                .catch(err => {
-                    console.error(err);
-                    display.innerText = "ТЫ СЛИШКОМ ХОРОШО ПРЯЧЕШЬСЯ... НО АРТЕМИЙ ТЕБЯ НАЙДЕТ.";
-                    scream.play();
-                });
-        }
-
-        function showResult(ip) {
-            const display = document.getElementById('ip-display');
-            display.innerHTML = `
-                ТВОЙ IP: ${ip} <br><br>
-                <span style="font-size: 1.2em; color: white;">У ТЕБЯ ЧАС НА ИЗВИНЕНИЯ... ПЕРЕД АРТЕМИЕМ.</span>
-            `;
-            scream.volume = 1.0;
-            scream.play();
-        }
-
-        function showTractor() {
-            const t = document.getElementById('tractor');
-            t.style.display = (t.style.display === 'block') ? 'none' : 'block';
-        }
-
-        setTimeout(() => {
-            document.getElementById('ad-box').style.display = 'block';
-        }, 4000);
-
-        function triggerScreamer() {
-            document.getElementById('ad-box').style.display = 'none';
-            const sc = document.getElementById('screamer');
-            sc.style.display = 'flex';
-            scream.volume = 1.0;
-            scream.play();
-            setTimeout(() => { sc.style.display = 'none'; }, 1500);
+            const music = document.getElementById('music');
+            music.play().catch(e => console.log("Нужен клик"));
         }
     </script>
+
 </body>
 </html>
